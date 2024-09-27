@@ -37,3 +37,8 @@ app.listen(process.env.PORT, () => {
   console.log(`API listening on port ${process.env.PORT}`);
 });
 
+import mealsRouter from './routers/meals.js';  // Import the new meals router
+
+// Add this line to use the meals router
+apiRouter.use('/meals', mealsRouter);
+
