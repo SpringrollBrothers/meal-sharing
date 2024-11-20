@@ -3,31 +3,30 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import knex from "./database_client.js";
-import mealRouter from "./routers/meal.js";
-import reviewRouter from "./routers/review.js";
-
+import nestedRouter from "./routers/nested.js";
+import { allMeals } from "./routers/all-meals.js";
+import { firstMeal } from "./routers/first-meal.js";
+import { futureMeal } from "./routers/future-meals.js";
+import { lastMeal } from "./routers/last-meal.js";
+import { pastMeal } from "./routers/past-meals.js";
+import mealsRouter from "./routers/meals.js"; // Import the new meals router
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 const apiRouter = express.Router();
 
-// You can delete this route once you add your own routes
 apiRouter.get("/", async (req, res) => {
-
-  const SHOW_TABLES_QUERY =
-    process.env.DB_CLIENT === "pg"
-      ? "SELECT * FROM pg_catalog.pg_tables;"
-      : "SHOW TABLES;";
-  const tables = await knex.raw(SHOW_TABLES_QUERY);
-  
-
-  res.json({ tables });
+  res.json({ messages: "welcome to meal sharing API" });
 });
 
 // This nested router example can also be replaced with your own sub-router
-apiRouter.use("/meal", mealRouter);
-apiRouter.use("/review", reviewRouter)
+apiRouter.use("/future-meals", futureMeal);
+apiRouter.use("/past-meals", pastMeal);
+apiRouter.use("/all-meals", allMeals);
+apiRouter.use("/first-meal", firstMeal);
+apiRouter.use("/last-meal", lastMeal);
+apiRouter.use("/meals", mealsRouter);
 
 app.use("/api", apiRouter);
 
