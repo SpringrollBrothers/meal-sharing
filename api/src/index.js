@@ -2,7 +2,6 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import knex from "./database_client.js";
 import { allMeals } from "./routers/all-meals.js";
 import { firstMeal } from "./routers/first-meal.js";
 import { futureMeal } from "./routers/future-meals.js";
@@ -30,6 +29,17 @@ apiRouter.use("/meals", mealsRouter);
 apiRouter.use("/review",reviewRouter)
 
 app.use("/api", apiRouter);
+
+
+
+//middleware for handling errors
+ app.use((err, req, res, next) => {
+  console.error(err.stack);
+  if (err.status == 404) {
+    res.status(404).json({ message: err.message });
+  }
+  res.status(500).json({ message: "An unexpected error occurred!" });
+ });
 
 app.listen(process.env.PORT, () => {
   console.log(`API listening on port ${process.env.PORT}`);
