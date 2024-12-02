@@ -1,0 +1,9 @@
+.mealCard {
+  border-radius: 10px;
+  border: red solid 1px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}

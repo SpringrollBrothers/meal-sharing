@@ -1,6 +1,7 @@
 "use client";
-import styled from "@emotion/styled";
+import styles from "./page.module.css";
 import React, { useEffect, useState } from "react";
+import Mealcard from "../components/Mealcard"
 
 function MealsList() {
   const [meals, setMeals] = useState([]);
@@ -21,17 +22,13 @@ function MealsList() {
   return (
     <>
       <h2>Meals</h2>
-      {meals.length > 0 ? (
-        meals.map((meal) => (
-          <div key={meal.id} className={styles.mealCard}>
-            <h3 className={styles.mealTitle}>{meal.title}</h3>
-            <p className={styles.mealDesc}>{meal.description}</p>
-            <p className={styles.mealPrice}>{meal.price}</p>
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div className={styles.container}>
+        {meals.length > 0 ? (
+          meals.map((meal) => <Mealcard key={meal.id} meal={meal}></Mealcard>)
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
     </>
   );
 }
