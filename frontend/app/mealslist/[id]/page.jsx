@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../page.module.css";
+import styles from "./id.module.css";
 
 async function getMealById(id) {
   const response = await fetch(`http://localhost:3001/api/meals/${id}`);
@@ -17,16 +17,20 @@ async function MealDetail({ params }) {
 
   return (
     <div className={styles.mealDetail}>
-      <img
-        src={meal.image_url}
-        alt={meal.title}
-        className={styles.imageDetail}
-      />
-      <h1 className={styles.titleDetail}>{meal.title}</h1>
-
-      <p className={styles.descriptionDetail}>{meal.DESCRIPTION}</p>
-      <p className={styles.priceDetail}>Price: {meal.price}</p>
-      <p className={styles.locationDetail}>Location: {meal.location}</p>
+      <div styles = {{backgroundImage:`url(${meal.image_url})`}} className={styles.imgContainer}>
+        <img
+          src={meal.image_url}
+          alt={meal.title}
+          className={styles.imageDetail}
+          id="imageDetail"
+        />
+      </div>
+      <div className={styles.infoContainer}>
+        <h1 className={styles.titleDetail}>{meal.title}</h1>
+        <p className={styles.descriptionDetail}>{meal.DESCRIPTION}</p>
+        <p className={styles.priceDetail}>Price: {meal.price}€</p>
+        <p className={styles.locationDetail}>Location: {meal.location}</p>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import React, { useEffect, useState } from "react";
-import Mealcard from "../components/Mealcard"
+import Mealcard from "../components/Mealcard";
 
 function MealsList() {
   const [meals, setMeals] = useState([]);
@@ -21,7 +21,6 @@ function MealsList() {
   }, []);
   return (
     <>
-      <h2>Meals</h2>
       <div className={styles.container}>
         {meals.length > 0 ? (
           meals.map((meal) => <Mealcard key={meal.id} meal={meal}></Mealcard>)

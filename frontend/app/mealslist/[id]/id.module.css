@@ -1,0 +1,18 @@
+.mealDetail {
+  display: flex;
+  margin: 200px auto;
+  width: 70%;
+  gap: 20px;
+  justify-content: center;
+}
+
+.imgContainer img {
+  width: 400px !important;
+  height: 400px !important;
+  object-fit: cover !important;
+  border-radius: 20px;
+}
+ 
+.infoContainer {
+  padding: 20px;
+}
